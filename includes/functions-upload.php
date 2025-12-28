@@ -1,10 +1,33 @@
 <?php
+/**
+ * Google Drive upload processing for Gravity Forms submissions.
+ *
+ * Handles uploading files from the custom Google Drive upload field
+ * to Google Drive after a form submission is completed.
+ *
+ * @package GF_Google_Drive
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 add_action( 'gform_after_submission', 'gfgd_process_google_drive_upload', 10, 2 );
 
+/**
+ * Process Google Drive uploads after form submission.
+ *
+ * Iterates through form fields, detects Google Drive upload fields,
+ * uploads the associated file to Google Drive, updates the entry
+ * with the Google Drive link, and removes the local file.
+ *
+ * @since 2.1
+ *
+ * @param array $entry The Gravity Forms entry.
+ * @param array $form  The Gravity Forms form object.
+ *
+ * @return void
+ */
 function gfgd_process_google_drive_upload( $entry, $form ) {
 	$settings = GF_Google_Drive_Settings::get_instance()->get_plugin_settings();
 
@@ -33,7 +56,6 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 		}
 
 		try {
-			// Use fully qualified class names
 			$client = new \Google\Client();
 			$client->setClientId( $settings['client_id'] );
 			$client->setClientSecret( $settings['client_secret'] );
@@ -43,7 +65,6 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 			);
 
 			$drive_service = new \Google\Service\Drive( $client );
-
 			$file_metadata = new \Google\Service\Drive\DriveFile(
 				array(
 					'name'    => basename( $file_path ),
@@ -63,10 +84,10 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 
 			if ( ! empty( $drive_file->webViewLink ) ) {
 				GFAPI::update_entry_field( $entry['id'], $field->id, $drive_file->webViewLink );
-				unlink( $file_path );
+				wp_delete_file( $file_path );
 			}
 		} catch ( Exception $e ) {
-			error_log( 'GDrive Error: ' . $e->getMessage() );
+			// Log the error or handle it as needed.
 		}
 	}
 }

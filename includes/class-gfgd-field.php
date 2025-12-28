@@ -1,4 +1,14 @@
 <?php
+/**
+ * Gravity Forms custom field for uploading a file to Google Drive.
+ *
+ * Defines a custom Gravity Forms field type that extends the core
+ * file upload field and provides a drag-and-drop UI for uploading
+ * a single file to Google Drive.
+ *
+ * @package GF_Google_Drive
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -7,20 +17,61 @@ use Google\Client;
 use Google\Service\Drive;
 use Google\Service\Drive\DriveFile;
 
+/**
+ * Class GF_Field_Google_Drive
+ *
+ * Custom Gravity Forms field that handles Google Drive file uploads.
+ *
+ * @since 2.1
+ */
 class GF_Field_Google_Drive extends GF_Field_FileUpload {
+
+	/**
+	 * Field type name.
+	 *
+	 * Used internally by Gravity Forms to identify the field type.
+	 *
+	 * @since 2.1
+	 *
+	 * @var string
+	 */
 	public $type = 'google_drive_upload';
 
+	/**
+	 * Get the field title shown in the Gravity Forms editor.
+	 *
+	 * @since 2.1
+	 *
+	 * @return string
+	 */
 	public function get_form_editor_field_title() {
-		return esc_html__( 'Google Drive Upload', 'gfgd' );
+		return esc_html__( 'Google Drive Upload', 'gravity-forms-google-drive-upload-addon' );
 	}
 
+	/**
+	 * Define the button settings for the Gravity Forms editor.
+	 *
+	 * Controls where and how the field button appears when adding
+	 * fields in the form editor.
+	 *
+	 * @since 2.1
+	 *
+	 * @return array
+	 */
 	public function get_form_editor_button() {
 		return array(
 			'group' => 'advanced_fields',
-			'text'  => esc_html__( 'Google Drive Upload', 'gfgd' ),
+			'text'  => esc_html__( 'Google Drive Upload', 'gravity-forms-google-drive-upload-addon' ),
 		);
 	}
 
+	/**
+	 * Get the settings available for this field in the form editor.
+	 *
+	 * @since 2.1
+	 *
+	 * @return array
+	 */
 	public function get_form_editor_field_settings() {
 		return array(
 			'label_setting',
@@ -33,6 +84,20 @@ class GF_Field_Google_Drive extends GF_Field_FileUpload {
 		);
 	}
 
+	/**
+	 * Generate the field input HTML.
+	 *
+	 * Outputs the drag-and-drop upload interface and file input element
+	 * used on the frontend form.
+	 *
+	 * @since 2.1
+	 *
+	 * @param array      $form  The current form object.
+	 * @param string     $value The field value.
+	 * @param array|null $entry The current entry object.
+	 *
+	 * @return string
+	 */
 	public function get_field_input( $form, $value = '', $entry = null ) {
 		$allowed_extensions = trim( (string) $this->allowedExtensions );
 		$accept             = $allowed_extensions
@@ -50,7 +115,7 @@ class GF_Field_Google_Drive extends GF_Field_FileUpload {
 
 		ob_start();
 		?>
-		<div class="gfgd-upload-container" id="gfgd-container-<?php echo $field_id; ?>">
+		<div class="gfgd-upload-container" id="gfgd-container-<?php echo esc_attr( $field_id ); ?>">
 			<div class="gfgd-drop-zone">
 				<div class="gfgd-drop-zone__content">
 					<div class="gfgd-drop-zone__icon">
@@ -75,8 +140,8 @@ class GF_Field_Google_Drive extends GF_Field_FileUpload {
 
 				<input
 					type="file"
-					name="input_<?php echo $field_id; ?>"
-					id="<?php echo $input_id; ?>"
+					name="input_<?php echo esc_attr( $field_id ); ?>"
+					id="<?php echo esc_attr( $input_id ); ?>"
 					class="gfgd-drop-zone__input"
 					<?php echo $accept ? 'accept="' . esc_attr( $accept ) . '"' : ''; ?>
 				/>
