@@ -9,22 +9,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const content      = container.querySelector(".gfgd-drop-zone__content");
         const clearBtn     = container.querySelector(".gfgd-clear-btn");
         
-        // Create hidden input to track file count for validation
-        const hiddenInput = document.createElement("input");
-        hiddenInput.type = "hidden";
-        hiddenInput.name = fileInput.name + "_count";
-        hiddenInput.value = "0";
-        container.appendChild(hiddenInput);
-
-        // Safety check (admin preview etc.)
         if (!dropZone || !fileInput) return;
 
-        dropZone.addEventListener("click", () => fileInput.click());
+        // Prevent opening file browser if "Clear" button is clicked
+        dropZone.addEventListener("click", (e) => {
+            if (e.target.classList.contains('gfgd-clear-btn')) return;
+            fileInput.click();
+        });
 
         fileInput.addEventListener("change", () => {
             if (fileInput.files.length) {
                 displayFileDetails(fileInput.files);
-                hiddenInput.value = fileInput.files.length; // Track files
             }
         });
 
@@ -41,24 +36,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
         dropZone.addEventListener("drop", (e) => {
             e.preventDefault();
-
             if (e.dataTransfer.files.length) {
-                // Create a DataTransfer object to properly set files
                 const dataTransfer = new DataTransfer();
                 Array.from(e.dataTransfer.files).forEach(file => {
                     dataTransfer.items.add(file);
                 });
                 fileInput.files = dataTransfer.files;
-                
                 displayFileDetails(fileInput.files);
-                hiddenInput.value = fileInput.files.length; // Track files
             }
-
             dropZone.classList.remove("gfgd-drop-zone--over");
         });
 
         if (clearBtn) {
-            clearBtn.addEventListener("click", function () {
+            clearBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
                 clearFiles();
             });
         }
@@ -74,20 +66,17 @@ document.addEventListener("DOMContentLoaded", function () {
         function displayFileDetails(files) {
             content.style.display = "none";
             filesList.innerHTML = "";
-
             Array.from(files).forEach(file => {
                 const fileItem = document.createElement("div");
                 fileItem.className = "gfgd-file-item";
                 fileItem.innerHTML = `
-                    <div class="gfgd-file-item__name">${file.name}</div>
-                    <div class="gfgd-file-item__meta">
+                    <div class="gfgd-file-item__name" style="font-weight:bold; margin-bottom:5px;">${file.name}</div>
+                    <div class="gfgd-file-item__meta" style="font-size:12px; color:#666;">
                         <span>📦 ${formatFileSize(file.size)}</span>
-                        <span>📄 ${file.type || "Unknown"}</span>
                     </div>
                 `;
                 filesList.appendChild(fileItem);
             });
-
             fileDetails.style.display = "block";
         }
 
@@ -97,9 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
             fileDetails.style.display = "none";
             filesList.innerHTML = "";
             content.style.display = "flex";
-            hiddenInput.value = "0"; 
         }
-
     });
-
 });
