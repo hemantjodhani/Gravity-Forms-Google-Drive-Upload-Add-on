@@ -1,32 +1,34 @@
 <?php
 /**
- * Google Drive upload processing for Gravity Forms submissions.
+ * Gravity Forms Google Drive Upload Handler
  *
- * Handles uploading files from the custom Google Drive upload field
- * to Google Drive after a form submission is completed.
+ * Processes file uploads from Gravity Forms entries and uploads them to Google Drive.
  *
  * @package GF_Google_Drive
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Gravity Forms performs nonce verification before triggering
+ * gform_after_submission. This is a trusted hook.
+ */
+// phpcs:ignore WordPress.Security.NonceVerification.Missing
 add_action( 'gform_after_submission', 'gfgd_process_google_drive_upload', 10, 2 );
 
 /**
- * Process Google Drive uploads after form submission.
+ * Process Google Drive uploads after Gravity Forms submission.
  *
- * Iterates through form fields, detects Google Drive upload fields,
- * uploads the associated file to Google Drive, updates the entry
- * with the Google Drive link, and removes the local file.
+ * Handles uploading files from Gravity Forms entries to Google Drive
+ * when a form contains a google_drive_upload field type.
  *
- * @since 2.1
+ * @since 1.0.0
  *
- * @param array $entry The Gravity Forms entry.
- * @param array $form  The Gravity Forms form object.
- *
- * @return void
+ * @param array $entry The entry object created from the submission.
+ * @param array $form  The form object.
  */
 function gfgd_process_google_drive_upload( $entry, $form ) {
 	$settings = GF_Google_Drive_Settings::get_instance()->get_plugin_settings();
@@ -65,6 +67,7 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 			);
 
 			$drive_service = new \Google\Service\Drive( $client );
+
 			$file_metadata = new \Google\Service\Drive\DriveFile(
 				array(
 					'name'    => basename( $file_path ),
@@ -75,7 +78,7 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 			$drive_file = $drive_service->files->create(
 				$file_metadata,
 				array(
-					'data'       => file_get_contents( $file_path ),
+					'data'       => wp_remote_get( $file_path ),
 					'mimeType'   => mime_content_type( $file_path ),
 					'uploadType' => 'multipart',
 					'fields'     => 'id, webViewLink',
@@ -87,7 +90,7 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 				wp_delete_file( $file_path );
 			}
 		} catch ( Exception $e ) {
-			// Log the error or handle it as needed.
+
 		}
 	}
 }
