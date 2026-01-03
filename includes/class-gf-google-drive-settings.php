@@ -20,43 +20,43 @@ class GF_Google_Drive_Settings extends GFAddOn {
 	 *
 	 * @var string
 	 */
-	protected $version = '2.1';
+	protected $_version = '2.1';
 	/**
 	 * Minimum required Gravity Forms version.
 	 *
 	 * @var string
 	 */
-	protected $min_gravityforms_version = '2.5';
+	protected $_min_gravityforms_version = '2.5';
 	/**
 	 * Slug used to identify this add-on.
 	 *
 	 * @var string
 	 */
-	protected $slug 					= 'drive-upload-for-gravity-forms';
+	protected $_slug = 'drive-upload-for-gravity-forms';
 	/**
 	 * Path to this file.
 	 *
 	 * @var string
 	 */
-	protected $path                     = __FILE__;
+	protected $_path = __FILE__;
 	/**
 	 * Full path to this file.
 	 *
 	 * @var string
 	 */
-	protected $full_path                = __FILE__;
+	protected $_full_path = __FILE__;
 	/**
 	 * The title of this add-on.
 	 *
 	 * @var string
 	 */
-	protected $title = 'Google Drive';
+	protected $_title = 'Google Drive';
 	/**
 	 * Short title used for menus and other places where a shorter title is appropriate.
 	 *
 	 * @var string
 	 */
-	protected $short_title              = 'Google Drive';
+	protected $_short_title = 'Google Drive';
 
 	/**
 	 * Singleton instance of the class.

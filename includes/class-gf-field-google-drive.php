@@ -108,10 +108,11 @@ class GF_Field_Google_Drive extends GF_Field_FileUpload {
 						<?php if ( $allowed_extensions ) : ?>
 							<p class="gfgd-drop-zone__note">
 								<?php
-								printf(
-									esc_html__( 'Allowed: %s', 'drive-upload-for-gravity-forms' ),
-									esc_html( strtoupper( $allowed_extensions ) )
-								);
+									printf(
+										/* translators: %s is the list of allowed file extensions (e.g., JPG, PNG). */
+										esc_html__( 'Allowed: %s', 'drive-upload-for-gravity-forms' ),
+										esc_html( strtoupper( $allowed_extensions ) )
+									);
 								?>
 							</p>
 						<?php endif; ?>

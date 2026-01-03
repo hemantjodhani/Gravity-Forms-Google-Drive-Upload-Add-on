@@ -78,7 +78,7 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 			$drive_file = $drive_service->files->create(
 				$file_metadata,
 				array(
-					'data'       => wp_remote_get( $file_path ),
+					'data'       => file_get_contents( $file_path ),
 					'mimeType'   => mime_content_type( $file_path ),
 					'uploadType' => 'multipart',
 					'fields'     => 'id, webViewLink',

@@ -30,6 +30,9 @@ add_action( 'gform_loaded', array( 'GF_Google_Drive_Bootstrap', 'load' ), 5 );
 add_action( 'wp_enqueue_scripts', 'gfgd_enqueue_assets' );
 add_action( 'admin_enqueue_scripts', 'gfgd_enqueue_assets' );
 
+/**
+ * Enqueues plugin assets (CSS and JS) for the Google Drive upload functionality.
+ */
 function gfgd_enqueue_assets() {
 	wp_enqueue_style(
 		'gfgd-upload',
