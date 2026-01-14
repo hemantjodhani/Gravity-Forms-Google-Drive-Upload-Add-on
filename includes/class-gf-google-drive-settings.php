@@ -14,43 +14,50 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 2.1
  */
-class GF_Google_Drive_Settings extends GFAddOn {
+class DUGF_Google_Drive_Settings extends GFAddOn {
+
 	/**
 	 * Version number of the add-on.
 	 *
 	 * @var string
 	 */
 	protected $_version = '2.1';
+
 	/**
 	 * Minimum required Gravity Forms version.
 	 *
 	 * @var string
 	 */
 	protected $_min_gravityforms_version = '2.5';
+
 	/**
 	 * Slug used to identify this add-on.
 	 *
 	 * @var string
 	 */
 	protected $_slug = 'drive-upload-for-gravity-forms';
+
 	/**
 	 * Path to this file.
 	 *
 	 * @var string
 	 */
 	protected $_path = __FILE__;
+
 	/**
 	 * Full path to this file.
 	 *
 	 * @var string
 	 */
 	protected $_full_path = __FILE__;
+
 	/**
 	 * The title of this add-on.
 	 *
 	 * @var string
 	 */
 	protected $_title = 'Google Drive';
+
 	/**
 	 * Short title used for menus and other places where a shorter title is appropriate.
 	 *
@@ -61,14 +68,14 @@ class GF_Google_Drive_Settings extends GFAddOn {
 	/**
 	 * Singleton instance of the class.
 	 *
-	 * @var GF_Google_Drive_Settings|null
+	 * @var DUGF_Google_Drive_Settings|null
 	 */
 	private static $instance = null;
 
 	/**
 	 * Returns the singleton instance of the class.
 	 *
-	 * @return GF_Google_Drive_Settings The singleton instance.
+	 * @return DUGF_Google_Drive_Settings The singleton instance.
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
