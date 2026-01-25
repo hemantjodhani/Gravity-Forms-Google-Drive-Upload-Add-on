@@ -21,6 +21,12 @@ Drive Upload for Gravity Forms seamlessly integrates Google Drive with your Grav
 - Easy Google authentication
 - Form field mapping
 
+== Video Tutorial ==
+
+Watch this step-by-step guide to setting up the plugin, including how to get your Google API Client ID, Secret, and Refresh Token.
+
+[youtube https://youtu.be/cf5WjW0TQSE]
+
 == Installation ==
 
 1. Upload the plugin folder to `/wp-content/plugins/`
@@ -49,8 +55,14 @@ For support, visit the plugin documentation or contact support.
 
 == Changelog ==
 
+= 2.1 =
+* Fixed: Fatal error "Class GFAddOn not found" by ensuring Gravity Forms is fully loaded before initialization.
+* Fixed: Resolved text domain mismatch issues.
+* Updated: Renamed all classes and functions to use the unique `DUGF_` prefix.
+* Updated: Added `composer.json` for dependency management.
+
 = 1.0.0 =
-- Initial release
+* Initial release
 
 == License ==
 
