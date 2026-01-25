@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Drive Upload for Gravity Forms (Google Drive)
- * Description: Adds a custom Gravity Forms field that uploads a single file to Google Drive.
+ * Description: Automatically sync Gravity Forms file uploads to Google Drive. Securely store and manage attachments in the cloud.
  * Version: 2.1
  * Author: Hemant Jodhani
  * License: GPL-2.0-or-later

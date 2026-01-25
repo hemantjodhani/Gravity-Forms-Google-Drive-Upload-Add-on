@@ -8,7 +8,7 @@ Stable tag: 2.1
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Upload form submissions directly to Google Drive with Gravity Forms.
+Automatically sync Gravity Forms file uploads to Google Drive. Securely store and manage attachments in the cloud.
 
 == Description ==
 
