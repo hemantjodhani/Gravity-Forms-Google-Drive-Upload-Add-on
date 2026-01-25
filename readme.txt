@@ -40,6 +40,13 @@ Drive Upload for Gravity Forms seamlessly integrates Google Drive with your Grav
 
 For support, visit the plugin documentation or contact support.
 
+== Screenshots ==
+
+1. Google Drive API Settings: Configure your Client ID, Client Secret, and destination Folder ID in the main settings.
+2. Easy Integration: Drag and drop the "Google Drive Upload" field from the Advanced Fields section in the form editor.
+3. Field Configuration: Customize file restrictions, including allowed extensions and maximum file size limits directly in the field settings.
+4. Seamless Uploads: Submissions are automatically uploaded and organized in your connected Google Drive folder.
+
 == Changelog ==
 
 = 1.0.0 =

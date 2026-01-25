@@ -4,7 +4,7 @@
  *
  * Processes file uploads from Gravity Forms entries and uploads them to Google Drive.
  *
- * @package GF_Google_Drive
+ * @package DUGF_Field_Google_Drive
  * @since   1.0.0
  */
 
@@ -17,7 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * gform_after_submission. This is a trusted hook.
  */
 // phpcs:ignore WordPress.Security.NonceVerification.Missing
-add_action( 'gform_after_submission', 'gfgd_process_google_drive_upload', 10, 2 );
+// FIXED: Renamed function prefix from 'gfgd_' to 'dugf_'
+add_action( 'gform_after_submission', 'dugf_process_google_drive_upload', 10, 2 );
 
 /**
  * Process Google Drive uploads after Gravity Forms submission.
@@ -30,7 +31,7 @@ add_action( 'gform_after_submission', 'gfgd_process_google_drive_upload', 10, 2 
  * @param array $entry The entry object created from the submission.
  * @param array $form  The form object.
  */
-function gfgd_process_google_drive_upload( $entry, $form ) {
+function dugf_process_google_drive_upload( $entry, $form ) {
 	$settings = DUGF_Google_Drive_Settings::get_instance()->get_plugin_settings();
 
 	if ( empty( $settings['client_id'] ) || empty( $settings['refresh_token'] ) ) {
@@ -48,7 +49,7 @@ function gfgd_process_google_drive_upload( $entry, $form ) {
 		}
 
 		$upload_dir = wp_upload_dir();
-		$file_path = '';
+		$file_path  = '';
 
 		if ( isset( $upload_dir['baseurl'] ) && strpos( $file_url, $upload_dir['baseurl'] ) !== false ) {
 			$file_path = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $file_url );

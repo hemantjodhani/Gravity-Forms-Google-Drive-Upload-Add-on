@@ -2,7 +2,7 @@
 /**
  * Bootstrap file for the Gravity Forms Google Drive add-on.
  *
- * @package GF_Google_Drive
+ * @package DUGF_Field_Google_Drive
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

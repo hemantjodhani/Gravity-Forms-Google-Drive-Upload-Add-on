@@ -2,7 +2,7 @@
 /**
  * Gravity Forms Google Drive upload field validation.
  *
- * @package GF_Google_Drive
+ * @package DUGF_Field_Google_Drive
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @phpcsIgnore WordPress.Security.NonceVerification.Recommended
  */
-add_filter( 'gform_field_validation', 'gfgd_validate_field', 10, 4 );
+add_filter( 'gform_field_validation', 'dugf_validate_field', 10, 4 );
 
 /**
  * Validate the Google Drive upload field.
@@ -28,7 +28,7 @@ add_filter( 'gform_field_validation', 'gfgd_validate_field', 10, 4 );
  *
  * @return array
  */
-function gfgd_validate_field( $result, $value, $form, $field ) {
+function dugf_validate_field( $result, $value, $form, $field ) {
 	if ( 'google_drive_upload' === $field->type && $field->isRequired ) {
 		if ( empty( $_FILES[ 'input_' . $field->id ]['name'] ) ) {
 			$result['is_valid'] = false;

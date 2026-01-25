@@ -3,7 +3,7 @@
 /**
  * Gravity Forms Google Drive Upload Field Class
  *
- * @package GF_Google_Drive
+ * @package DUGF_Field_Google_Drive
  */
 
 if (! defined('ABSPATH')) {
@@ -34,7 +34,7 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 	 * @return string
 	 */
 	public function get_form_editor_field_title() {
-		return esc_html__('Google Drive Upload', 'drive-upload-for-gravity-forms-google-drive');
+		return esc_html__('Google Drive Upload', 'drive-upload-for-gravity-forms');
 	}
 
 	/**
@@ -45,7 +45,7 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 	public function get_form_editor_button() {
 		return array(
 			'group' => 'advanced_fields',
-			'text'  => esc_html__('Google Drive Upload', 'drive-upload-for-gravity-forms-google-drive'),
+			'text'  => esc_html__('Google Drive Upload', 'drive-upload-for-gravity-forms'),
 		);
 	}
 
@@ -103,8 +103,8 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 						</svg>
 					</div>
 					<span class="gfgd-drop-zone__prompt">
-						<?php echo esc_html__('Drop file or', 'drive-upload-for-gravity-forms-google-drive'); ?>
-						<strong><?php echo esc_html__('browse', 'drive-upload-for-gravity-forms-google-drive'); ?></strong>
+						<?php echo esc_html__('Drop file or', 'drive-upload-for-gravity-forms'); ?>
+						<strong><?php echo esc_html__('browse', 'drive-upload-for-gravity-forms'); ?></strong>
 					</span>
 
 					<?php if ($allowed_extensions) : ?>
@@ -112,7 +112,7 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 							<?php
 							printf(
 								/* translators: %s is the list of allowed file extensions (e.g., JPG, PNG). */
-								esc_html__('Allowed: %s', 'drive-upload-for-gravity-forms-google-drive'),
+								esc_html__('Allowed: %s', 'drive-upload-for-gravity-forms'),
 								esc_html(strtoupper($allowed_extensions))
 							);
 							?>
@@ -123,7 +123,7 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 				<div class="gfgd-file-details" style="display:none;">
 					<div class="gfgd-files-list"></div>
 					<button type="button" class="gfgd-clear-btn">
-						<?php echo esc_html__('Clear', 'drive-upload-for-gravity-forms-google-drive'); ?>
+						<?php echo esc_html__('Clear', 'drive-upload-for-gravity-forms'); ?>
 					</button>
 				</div>
 
