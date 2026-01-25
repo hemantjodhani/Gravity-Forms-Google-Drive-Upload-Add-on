@@ -75,8 +75,7 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 	 *
 	 * @return string The rendered field input HTML.
 	 */
-	public function get_field_input($form, $value = '', $entry = null)
-	{
+	public function get_field_input($form, $value = '', $entry = null) {
 		$allowed_extensions = trim((string) $this->allowedExtensions);
 		$accept             = $allowed_extensions
 			? implode(
@@ -88,7 +87,7 @@ class DUGF_Field_Google_Drive extends GF_Field_FileUpload {
 			)
 			: '';
 
-		$field_id = absint($this->id);
+		$field_id = absint( $this->id );
 		$input_id = "input_{$form['id']}_{$field_id}";
 
 		ob_start();

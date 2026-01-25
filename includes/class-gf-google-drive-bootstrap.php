@@ -5,7 +5,7 @@
  * @package GF_Google_Drive
  */
 
-if (! defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -23,9 +23,15 @@ class DUGF_Google_Drive_Bootstrap {
 	 */
 	public static function load() {
 
-		if (! method_exists('GFForms', 'include_addon_framework')) {
+		if ( ! method_exists( 'GFForms', 'include_addon_framework' ) ) {
 			return;
 		}
+
+
+		GFForms::include_addon_framework();
+
+		require_once __DIR__ . '/class-gf-google-drive-settings.php';
+		require_once __DIR__ . '/class-gf-field-google-drive.php';
 
 		DUGF_Google_Drive_Settings::get_instance();
 

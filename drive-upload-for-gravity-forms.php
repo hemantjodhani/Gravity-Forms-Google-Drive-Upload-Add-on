@@ -20,8 +20,7 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 }
 
 require_once __DIR__ . '/includes/class-gf-google-drive-bootstrap.php';
-require_once __DIR__ . '/includes/class-gf-google-drive-settings.php';
-require_once __DIR__ . '/includes/class-gf-field-google-drive.php';
+
 require_once __DIR__ . '/includes/functions-validation.php';
 require_once __DIR__ . '/includes/functions-upload.php';
 
